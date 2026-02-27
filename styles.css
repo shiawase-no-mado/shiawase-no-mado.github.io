@@ -1,0 +1,524 @@
+/* === TOMOKO Suncatchers CSS === */
+/* 編集ガイド: このファイルでサイトの色やフォント、レイアウトを調整できます。 */
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&display=swap');
+
+/* --- 色の変数 --- */
+/* ここでサイト全体の基本色を変更できます。 */
+:root {
+  --bg-color: #FEFDFB; /* 背景色: やわらかなオフホワイト */
+  --text-color: #433E39; /* 基本文字色: ブラウンがかったグレー */
+  --accent-gold: #D4AF7A; /* アクセントのゴールド (ソフトに) */
+  --accent-pink: #F5DCE0; /* アクセントのピンク */
+  --border-color: #EAE8E1; /* 枠線の色 */
+  --white-color: #FFFFFF; /* カードなどの背景色 */
+  --rainbow-gradient: linear-gradient(90deg, rgba(212, 175, 122, 0.2), rgba(245, 220, 224, 0.4), rgba(173, 216, 230, 0.3)); /* さらに控えめな虹色グラデーション */
+}
+
+/* --- 基本設定 --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth; /* ナビゲーションクリック時のスムーズな移動 */
+  font-size: 100%;
+}
+
+body {
+  font-family: "M PLUS Rounded 1c", -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif; /* 丸みのあるフォント */
+  line-height: 1.8;
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+  border-style: none;
+}
+
+a {
+  color: var(--accent-gold);
+  text-decoration: none;
+  transition: opacity 0.3s ease;
+}
+
+a:hover {
+  opacity: 0.7;
+}
+
+h1, h2, h3 {
+  font-family: "M PLUS Rounded 1c", sans-serif; /* 見出しにも丸ゴシック */
+  font-weight: 700; /* 少し太めにして可読性を担保 */
+  letter-spacing: 0.1em; /* 見出しの字間を少し広めに */
+  line-height: 1.4;
+}
+
+h2 {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 3rem;
+  color: var(--accent-gold);
+}
+
+.container {
+  width: 90%;
+  max-width: 960px; /* 少し狭めて余白を強調 */
+  margin: 0 auto;
+  padding: 6rem 0;
+}
+
+/* --- ヘッダー --- */
+.header {
+  background-color: rgba(254, 253, 251, 0.85); /* 背景を少し透過 */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border-color);
+  padding: 1rem 5%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  color: var(--text-color);
+}
+
+.nav-list {
+  display: none; /* スマホでは非表示 */
+  list-style: none;
+}
+
+.nav-item {
+  margin-left: 2rem;
+}
+
+.nav-link {
+  color: var(--text-color);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+/* ハンバーガーメニュー */
+.menu-toggle {
+  display: block;
+  width: 30px;
+  height: 22px;
+  position: relative;
+  cursor: pointer;
+  z-index: 1001;
+}
+.menu-toggle span {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background-color: var(--text-color);
+  transition: all 0.3s;
+  border-radius: 2px;
+}
+.menu-toggle span:nth-child(1) { top: 0; }
+.menu-toggle span:nth-child(2) { top: 10px; }
+.menu-toggle span:nth-child(3) { top: 20px; }
+
+/* メニューオープン時 */
+.menu-toggle.is-active span:nth-child(1) { top: 10px; transform: rotate(45deg); }
+.menu-toggle.is-active span:nth-child(2) { opacity: 0; }
+.menu-toggle.is-active span:nth-child(3) { top: 10px; transform: rotate(-45deg); }
+
+/* スマホ用ナビゲーション */
+.mobile-nav {
+  position: fixed;
+  top: 0;
+  left: 100%;
+  width: 100%;
+  height: 100vh;
+  background-color: var(--bg-color);
+  transition: left 0.5s;
+  z-index: 999;
+  padding-top: 80px;
+}
+.mobile-nav.is-active {
+  left: 0;
+}
+.mobile-nav .nav-list {
+  display: block;
+  text-align: center;
+}
+.mobile-nav .nav-item {
+  margin: 2rem 0;
+}
+.mobile-nav .nav-link {
+  font-size: 1.2rem;
+}
+
+
+/* --- ヒーローセクション --- */
+.hero {
+  height: 100vh;
+  min-height: 500px;
+  background-image: url('assets/images/hero.jpg');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: var(--white-color);
+  position: relative;
+  padding: 0 5%;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.15); /* 画像を少し暗くして文字を読みやすく */
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-catchphrase {
+  font-size: 2.8rem;
+  margin-bottom: 2rem;
+  text-shadow: 1px 1px 15px rgba(0,0,0,0.4);
+}
+
+.cta-button {
+  display: inline-block;
+  background-color: var(--accent-gold);
+  color: var(--white-color);
+  padding: 1.2rem 3rem;
+  border-radius: 50px;
+  font-weight: bold;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 6px 25px rgba(0,0,0,0.2);
+  opacity: 1;
+}
+
+/* --- 共通セクションスタイル --- */
+#gallery, #about, #order, #price, #care, #swarovski, #faq {
+  padding-top: 80px; /* 固定ヘッダー分の余白 */
+  margin-top: -80px;
+}
+
+/* --- ギャラリー --- */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.gallery-item {
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: 25px; /* 角丸をさらに大きく */
+  box-shadow: 0 10px 25px rgba(0,0,0,0.07);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.gallery-item:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 18px 35px rgba(0,0,0,0.12);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* --- モーダル (ライトボックス) --- */
+.modal {
+  display: none; /* 初期状態は非表示 */
+  position: fixed;
+  z-index: 2000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.85);
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+}
+
+.modal-content {
+  margin: auto;
+  display: block;
+  width: auto;
+  max-width: 90%;
+  height: auto;
+  max-height: 80vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 15px;
+}
+
+.modal-close {
+  position: absolute;
+  top: 20px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.modal-close:hover,
+.modal-close:focus {
+  color: #bbb;
+  text-decoration: none;
+}
+
+/* --- 作家紹介 --- */
+.about-flex {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  text-align: center;
+}
+
+.about-img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 0 8px var(--white-color), 0 0 0 10px var(--accent-pink);
+}
+
+.about-text {
+  max-width: 600px;
+}
+
+/* --- オーダー手順 --- */
+.order-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  counter-reset: step-counter;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.step {
+  background-color: var(--white-color);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 1.5rem 2rem 1.5rem 4.5rem;
+  position: relative;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.step:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+}
+
+.step::before {
+  counter-increment: step-counter;
+  content: counter(step-counter);
+  position: absolute;
+  left: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: var(--accent-gold);
+  color: var(--white-color);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+}
+
+/* --- 価格と納期 --- */
+.price-card {
+  background-color: var(--white-color);
+  border: 1px solid var(--border-color);
+  border-radius: 25px;
+  padding: 2.5rem;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.price-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+}
+
+.price-card h3 {
+  color: var(--accent-gold);
+  margin-bottom: 1rem;
+}
+
+.price-card .price {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  color: var(--text-color);
+}
+
+.price-card .note {
+  font-size: 0.9rem;
+  color: #777;
+}
+
+.price-info {
+  text-align: center;
+  margin-top: 2rem;
+  padding: 2rem;
+  background: var(--rainbow-gradient);
+  border-radius: 20px;
+}
+
+/* --- お手入れ・スワロフスキー --- */
+.info-section {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: var(--white-color);
+  border: 1px solid var(--border-color);
+  border-radius: 25px;
+  padding: 2.5rem;
+}
+
+.info-section ul {
+  list-style: none;
+  padding-left: 1.5rem;
+}
+
+.info-section li {
+  position: relative;
+  margin-bottom: 0.5rem;
+}
+
+.info-section li::before {
+  content: '✧';
+  position: absolute;
+  left: -1.5rem;
+  color: var(--accent-gold);
+}
+
+/* --- FAQ (アコーディオン) --- */
+.faq-item {
+  background-color: var(--white-color);
+  border-bottom: 1px solid var(--border-color);
+}
+.faq-item:first-child {
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  border-top: 1px solid var(--border-color);
+}
+.faq-item:last-child {
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.faq-question {
+  width: 100%;
+  background: none;
+  border: none;
+  text-align: left;
+  padding: 1.5rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.faq-question::after {
+  content: '+';
+  font-size: 1.5rem;
+  color: var(--accent-gold);
+  transition: transform 0.3s;
+}
+
+.faq-question[aria-expanded="true"]::after {
+  transform: rotate(45deg);
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-out, padding 0.5s ease-out;
+  padding: 0 1.5rem;
+}
+.faq-answer p {
+  margin-bottom: 1.5rem;
+}
+
+/* --- フッター --- */
+.footer {
+  background-color: var(--text-color);
+  color: var(--bg-color);
+  text-align: center;
+  padding: 3rem 5%;
+}
+
+.footer-links {
+  margin-bottom: 1rem;
+}
+
+.footer-links a {
+  color: var(--bg-color);
+  margin: 0 0.5rem;
+}
+
+.copyright {
+  font-size: 0.8rem;
+}
+
+/* --- レスポンシブ対応 (PC) --- */
+@media (min-width: 768px) {
+  .menu-toggle {
+    display: none; /* PCではハンバーガー非表示 */
+  }
+
+  .nav-list {
+    display: flex; /* PCではナビゲーション表示 */
+  }
+  
+  .about-flex {
+    flex-direction: row;
+    text-align: left;
+    gap: 3rem;
+  }
+}
+
+/* --- ユーティリティ --- */
+.text-center {
+  text-align: center;
+}
+.mt-large {
+  margin-top: 4rem;
+}

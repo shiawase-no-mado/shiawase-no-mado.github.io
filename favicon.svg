@@ -1,0 +1,17 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .stop1 { stop-color: #FFD700; } /* Gold */
+    .stop2 { stop-color: #FFC0CB; } /* Pink */
+    .stop3 { stop-color: #ADD8E6; } /* Light Blue */
+  </style>
+  <defs>
+    <radialGradient id="grad1" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" class="stop1" stop-opacity="0.8" />
+      <stop offset="50%" class="stop2" stop-opacity="0.7" />
+      <stop offset="100%" class="stop3" stop-opacity="0.8" />
+    </radialGradient>
+  </defs>
+  <circle cx="50" cy="50" r="45" fill="url(#grad1)"/>
+  <path d="M 50,5 A 45,45 0 0,1 95,50" stroke="#FFD700" stroke-width="3" fill="none" />
+  <path d="M 5,50 A 45,45 0 0,1 50,95" stroke="#FFD700" stroke-width="3" fill="none" />
+</svg>

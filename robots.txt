@@ -1,0 +1,12 @@
+# See http://www.robotstxt.org/robotstxt.html for documentation on how to use the robots.txt file
+#
+# To ban all spiders from the entire site uncomment the following two lines:
+# User-agent: *
+# Disallow: /
+
+User-agent: *
+Allow: /
+
+# サイトマップの場所を検索エンジンに伝えます。
+# Webサイトを公開後、(あなたのドメイン) の部分を実際のドメイン名に書き換えてください。
+Sitemap: https://shiawase-no-mado.github.io/sitemap.xml
